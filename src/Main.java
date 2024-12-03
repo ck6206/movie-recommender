@@ -1,6 +1,7 @@
 import java.util.Scanner;
 public class Main
 {
+
     //Animated
     static Movie spirit = new Movie("Spirited Away","Animated Adventure",135,96,"Spirited Away tells the story of Chihiro, a young girl who stumbles into a mystical world of spirits while moving to a new home and must work in a bathhouse to save her parents, who have been transformed into pigs. Along her journey, she discovers courage, kindness, and the value of self-reliance while navigating a realm filled with magic and mystery.");
     static Movie despic = new Movie("Despicable Me","Animated Comedy",95,83,"Despicable Me follows Gru, a supervillain who plans to steal the moon but finds his life transformed when he adopts three orphaned girls as part of his scheme. As the girls melt his heart, Gru discovers the joys of family and redefines his priorities, turning from villainy to fatherhood.");
@@ -38,6 +39,17 @@ public class Main
     static Movie[] comedy = {grownups, superbad, stepbros};
 
     static Movie[] genre;
+    static String genre2;
+    static String color;
+    static String blue = "\u001B[34m";
+    static String red = "\u001B[31m";
+    static String yellow = "\u001B[33m";
+    static String magenta = "\u001B[35m";
+    static String cyan = "\u001B[36m";
+    static String green = "\u001B[32m";
+    static String reset = "\u001B[0m";
+
+
 
     static String[] goodBye = {"quit","exit","end"};
 
@@ -54,7 +66,7 @@ public class Main
    
        public static void main(String[] args)
        {        
-        System.out.println("Hey! I heard you're looking for a movie to watch. What genre are you interested in? I can recommend you Horror, Romance, Comedy, SciFi, Action or Animated movies. (Type 'quit' to exit)");
+        System.out.println("Hey! I heard you're looking for a movie to watch. What genre are you interested in? I can recommend you"+red+" Horror,"+magenta+" Romance,"+green+" Comedy,"+cyan+" SciFi,"+blue+" Action"+reset+" or"+yellow+" Animated" +reset+" movies. (Type 'quit' to exit)");
         whatGenre();
        }
 
@@ -66,35 +78,41 @@ public class Main
                         || statement.indexOf("scary") >= 0)
                  {
                         genre = horror;
-                         response = "So you're looking for a horror movie?";
+                        genre2="horror";
+                         response = "So you're looking for a"+red+" horror"+reset+" movie?";
                  }
                  else if (statement.indexOf("romance") >= 0)
                  {
                         genre = romance;
-                         response = "So a romance movie is the move?";
+                        genre2="romance";
+                         response = "So a"+magenta+ " romance"+reset+" movie is the move?";
                  }
                  else if (statement.indexOf("comedy") >= 0
                                 || statement.indexOf("funny") >= 0)
                  {
                         genre = comedy;
-                         response = "So you want a laugh from a comedy movie?";
+                        genre2="comedy";
+                         response = "So you want a laugh from a"+ green+" comedy"+ reset+" movie?";
                  }
                  else if (statement.indexOf("action") >= 0)
                  {
                         genre = action;
-                         response = "So you're looking for a thrill with some action?";
+                        genre2="action";
+                         response = "So you're looking for a thrill with some"+blue+" action? "+reset;
                  }
                  else if (statement.indexOf("scifi") >= 0 
                                 || statement.indexOf("science fiction") >= 0
                                 || statement.indexOf("sciencefiction") >= 0)
                  {
                         genre = scifi;
-                         response = "So you're looking for a science fiction movie?";
+                        genre2="scifi";
+                         response = "So you're looking for a"+cyan+" science fiction "+reset+"movie?";
                  }
                  else if (statement.indexOf("animated") >= 0)
                  {
                         genre = animated;
-                         response = "So you're looking for some beautiful art paired with a great story in an animated movie??";
+                        genre2="animated";
+                         response = "So you're looking for some beautiful art paired with a great story in an"+yellow+" animated "+reset+"movie?";
                  }
                  else{
                         response=getRandomResponse(noUnderstand);
@@ -177,17 +195,49 @@ public class Main
                 movieGiver();
         }
 
+        public static void getGenreCol(String g){
+                if(g.equals("horror")){
+                    color=red;
+                }
+                else if(g.equals("action")){
+                    color=blue;
+                }
+                else if(g.equals("scifi")){
+                    color=cyan;
+                }
+                else if(g.equals("animated")){
+                    color=yellow;
+                }
+                else if(g.equals("romance")){
+                    color=magenta;
+                }
+                else if(g.equals("comedy")){
+                    color=green;
+                }
+        }
+
         public static void recommender(){
+                getGenreCol(genre2);
                 Scanner in = new Scanner (System.in);//Creates scanner object.
                 int count = 0;
                 boolean cont = true;
                 boolean foundRec = false;
                 while(cont){
-                        System.out.println(genre[count].toString());
+                        System.out.println(genre[count].toString(color));
                         System.out.println(" ");
                         System.out.println("Does this one sound good?");
                         count++;
+                        boolean cont3=true;
                         String userResp = in.nextLine();
+                        while(cont3){
+                                if(yesNo(userResp).equals("n") || yesNo(userResp).equals("y")){
+                                        cont3=false;
+                                }
+                                else{
+                                        System.out.println(getRandomResponse(noUnderstand));
+                                        userResp=in.nextLine();
+                                }
+                        }
                         quitCheck(userResp);
                         if(yesNo(userResp).equals("y")){
                                 cont=false;
@@ -198,6 +248,16 @@ public class Main
                                         System.out.println("Sorry, but I have no more recommendations of your chosen genre. Would you like to explore a new genre?");
                                         String userResp2 = in.nextLine();
                                         quitCheck(userResp2);
+                                        boolean cont4 = true;
+                                        while(cont4){
+                                                if(yesNo(userResp2).equals("y") || yesNo(userResp2).equals("n")){
+                                                        cont4=false;
+                                                }
+                                                else{
+                                                        System.out.println(getRandomResponse(noUnderstand));
+                                                        userResp2=in.nextLine();
+                                                }
+                                        }
                                         if(yesNo(userResp2).equals("y")){
                                                 System.out.println(" ");
                                                 System.out.println("What genre are you interested in? I can recommend you Horror, Romance, Comedy, SciFi, Action or Animated movies.");
@@ -213,9 +273,6 @@ public class Main
                                         System.out.println(" ");
                                         System.out.println(getRandomResponse(nextRec));
                                 }
-                        }
-                        else{
-                                System.out.println(getRandomResponse(noUnderstand));
                         }
                 }
                 if(foundRec){

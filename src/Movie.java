@@ -4,6 +4,7 @@ public class Movie {
     private int minutes;
     private int rating;
     private String summary;
+    private String reset = "\u001B[0m";
     
     public Movie(String n, String g, int m, int r, String s){
         name = n;
@@ -13,8 +14,7 @@ public class Movie {
         summary = s;
     }
 
-    public String toString(){
-        return name+" is a "+genre+" movie. It is "+minutes+" minutes long, and has a "+rating+"% audience score on Rotten Tomatoes. "+summary;
+    public String toString(String g){
+        return g+name+reset+" is a "+g+genre+reset+" movie. It is "+g+minutes+reset+" minutes long, and has a "+g+rating+"% "+reset+"audience score on Rotten Tomatoes. "+summary;
     }
-
 }
