@@ -140,22 +140,22 @@ public class Main
                     if (statement.indexOf("no") >= 0 || statement.indexOf("nah") >= 0 || statement.indexOf("nope") >= 0){
                         end="n";   
                     }
-                    else if(statement.indexOf("yes") >= 0 || statement.indexOf("yeah") >= 0 || statement.indexOf("yep") >= 0 || statement.indexOf("sure") >= 0){
+                    else if(statement.indexOf("yes") >= 0 || statement.indexOf("yea") >= 0 || statement.indexOf("yep") >= 0 || statement.indexOf("sure") >= 0){
                         end = "y";
                     }
                     return end;
         }
         
         public static void movieGiver(){
-                Scanner in2 = new Scanner (System.in);//Creates scanner object.
+                Scanner in2 = new Scanner (System.in);
                 boolean cont2=true;
                 while(cont2){
                         String userResp1 = in2.nextLine(); 
                         quitCheck(userResp1);
                         if(yesNo(userResp1).equals("y")){
                                 cont2=false;
-                                System.out.println("Ok, great! I've got a couple recommendations. Here's the first one:");
                                 System.out.println(" ");
+                                System.out.println("Ok, great! I've got a couple recommendations. Here's the first one:");
                                 cont2=false;
                                 recommender();
                         }
@@ -172,7 +172,7 @@ public class Main
         }
 
         public static void whatGenre(){
-                Scanner in = new Scanner (System.in);//Creates scanner object.
+                Scanner in = new Scanner (System.in);
                 boolean cont = true;
                 int count2 = 0;
                 while(cont){
@@ -218,7 +218,7 @@ public class Main
 
         public static void recommender(){
                 getGenreCol(genre2);
-                Scanner in = new Scanner (System.in);//Creates scanner object.
+                Scanner in = new Scanner (System.in);
                 int count = 0;
                 boolean cont = true;
                 boolean foundRec = false;
